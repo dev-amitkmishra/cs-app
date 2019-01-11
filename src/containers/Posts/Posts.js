@@ -32,7 +32,11 @@ class Posts extends Component {
     clickHandler = (postId) => {
         this.setState({selectedPostId: postId});
 
-        //demo this.props.history.push({     pathname: '/' + postId })
+        //demo 
+        // this.props.history.push({     pathname: '/' + postId })
+        // use replace instead of push if, previous page is not required to show after page submission
+
+        //lazy-loading(or code-splitting) means -> load only those components which are required and not others.
     }
     render() {
         const posts = this
