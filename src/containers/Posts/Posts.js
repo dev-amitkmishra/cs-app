@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Post from '../../components/Post/Post';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, Route} from 'react-router-dom';
+import FullPost from '../FullPost/FullPost';
 import './Posts.css';
 
 class Posts extends Component {
@@ -31,10 +32,7 @@ class Posts extends Component {
     clickHandler = (postId) => {
         this.setState({selectedPostId: postId});
 
-        //demo
-        // this.props.history.push({
-        //     pathname: '/' + postId
-        // })
+        //demo this.props.history.push({     pathname: '/' + postId })
     }
     render() {
         const posts = this
@@ -42,21 +40,24 @@ class Posts extends Component {
             .posts
             .map((post) => {
                 return (
-                    <Link key={'key_' + post.id} to={'/' + post.id}>
+                    <Link key={'key_' + post.id} to={'/posts/' + post.id}>
                         <Post
                             clicked={() => this.clickHandler(post.id)}
                             key={post.id}
                             title={post.title}
                             author={post.author}/>
                     </Link>
-                    // without Link also we can achieve the same thing check keyword demo
-                    // 
+                // without Link also we can achieve the same thing check keyword demo
+                //
                 )
             })
         return (
-            <section>
-                {posts}
-            </section>
+            <div className="Posts">
+                <section>
+                    {posts}
+                </section>
+                <Route path="/posts/:id" component={FullPost}/>
+            </div>
         );
     }
 }
